@@ -32,12 +32,12 @@ export class AppComponent implements OnInit {
   mergeMapSample(): void {
     console.log("----- mergeMapのサンプルです -----");
     this.http
-      .get<Array<User>>("https://jsonplaceholder.typicode.com/users")
+      .get<User[]>("https://jsonplaceholder.typicode.com/users")
       .pipe(
         mergeMap(x => x), // 配列を要素に平坦化
         mergeMap(x => {
           console.log("mergeMap 投入されました -> " + x.id + " -> " + x.name);
-          return this.http.get<Array<Posts>>(
+          return this.http.get<Posts[]>(
             `https://jsonplaceholder.typicode.com/posts?userId=${x.id}`
           );
         })
@@ -52,12 +52,12 @@ export class AppComponent implements OnInit {
   switchMapSample(): void {
     console.log("----- switchMapのサンプルです -----");
     this.http
-      .get<Array<User>>("https://jsonplaceholder.typicode.com/users")
+      .get<User[]>("https://jsonplaceholder.typicode.com/users")
       .pipe(
         mergeMap(x => x), // 配列を要素に平坦化
         switchMap(x => {
           console.log("switchMap 投入されました -> " + x.id + " -> " + x.name);
-          return this.http.get<Array<Posts>>(
+          return this.http.get<Posts[]>(
             `https://jsonplaceholder.typicode.com/posts?userId=${x.id}`
           );
         })
@@ -72,12 +72,12 @@ export class AppComponent implements OnInit {
   concatMapSample(): void {
     console.log("----- concatMapのサンプルです -----");
     this.http
-      .get<Array<User>>("https://jsonplaceholder.typicode.com/users")
+      .get<User[]>("https://jsonplaceholder.typicode.com/users")
       .pipe(
         mergeMap(x => x), // 配列を要素に平坦化
         concatMap(x => {
           console.log("concatMap 投入されました -> " + x.id + " -> " + x.name);
-          return this.http.get<Array<Posts>>(
+          return this.http.get<Posts[]>(
             `https://jsonplaceholder.typicode.com/posts?userId=${x.id}`
           );
         })
